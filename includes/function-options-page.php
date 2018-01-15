@@ -13,25 +13,25 @@
  */
 
 
-if ( ! function_exists('loginpetze_options_page' ) ) {
+if  ( ! function_exists('loginpetze_options_page' ) ) {
 
-	/**
-	 * Adds adds second level menu page to the WordPress main menu
-	 */
-	function loginpetze_options_page() {
+        /**
+         * Adds adds second level menu page to the WordPress main menu
+         */
+        function loginpetze_options_page() {
 
-		// add second level menu page
-		add_submenu_page(
-			'options-general.php', // parent page for the submenu
-			/* translators: title for the settings page */
-			__( 'Loginpetze Settings', 'loginpetze' ), // page title
-			/* translators: title for the submenu entry; default: the untranslated name of the plugin */
-			__( 'Loginpetze', 'loginpetze' ), // menu title
-			'manage_options', // capability
-			'loginpetze-options', // menu slug
-			'loginpetze_options_page_html'
-		);
+            // add second level menu page
+            add_submenu_page(
+                'options-general.php', // parent page for the submenu
+                /* translators: title for the settings page */
+                __( 'Loginpetze Settings', 'loginpetze' ), // page title
+                /* translators: title for the submenu entry; default: the untranslated name of the plugin */
+                __( 'Loginpetze', 'loginpetze' ), // menu title
+                'manage_options', // capability
+                'loginpetze-options', // menu slug
+                'loginpetze_options_page_html'
+            );
 
-	}
+        }
 
-}
+    }

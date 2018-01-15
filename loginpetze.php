@@ -16,7 +16,7 @@
  * Plugin Name:       Loginpetze
  * Plugin URI:        https://wordpress.org/plugins/loginpetze/
  * Description:       Notifies the admin by email as soon as a user has successfully logged in.
- * Version:           0.99
+ * Version:           1.0
  * Author:            Christian Sabo
  * Author URI:        https://profiles.wordpress.org/pixelverbieger
  * License:           GPL-2.0+
@@ -36,66 +36,86 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Loginpetze. If not, see http://www.gnu.org/licenses/gpl-2.0.txt.
-*/
+ */
+
+/*
+ * If this file is called directly, abort.
+ */
+if ( ! defined( 'WPINC' ) ) {
+	die( 'Direct access is not allowed.' );
+}
 
 
-// todo: start-dateien, hooks und ladereihenfolge aufräumen/richtig sortieren - capabilities kontrollieren - conditional loading
+/*
+ * For future reference, we define a version number for the options
+ */
+define( 'LOGINPETZE_DB_VERSION', '1.0' );
 
-// todo: mindestens benötigte PHP- und Wordpress-Version testen und Readme anpassen
+define( 'LOGINPETZE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'LOGINPETZE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'LOGINPETZE_PLUGIN_BASE_NAME', plugin_basename( __FILE__ ) );
+define( 'LOGINPETZE_PLUGIN_FILE', basename( __FILE__ ) );
+define( 'LOGINPETZE_PLUGIN_FULL_PATH', __FILE__ );
 
-// todo: Doku fertigstellen, siehe @link http://manual.phpdoc.org/HTMLSmartyConverter/PHP/phpDocumentor/tutorial_tags.pkg.html
 
-// todo: POT-Datei erstellen, siehe https://developer.wordpress.org/themes/functionality/localization/#poedit
+/*
+ * Before we begin, let's load some functions.
+ */
+require_once( 'includes/_loader.php' );
 
-// todo: Plugin einreichen
 
+/*
+ * When activating the plugin, we need to set some default values
+ */
+
+if ( ! is_multisite() ) {
+    register_activation_hook( __FILE__, 'set_default_values' );
+}
+
+if ( is_multisite() ) {
+    /* translators: Notice */
+    $message = esc_html_e( 'Loginpetze 1.x does not work on Multisite, I regret.', 'loginpetze');
+    die($message);
+}
+
+/*
+ * When deactivating the plugin, nothing has to be done.
+ */
+
+/*
+ * When deleting the plugin, the file 'uninstall.php' will be called automatically.
+ */
+
+
+/*
+ * Main purpose:
+ * If a user successfully logged in, send a notification email
+ */
+add_action( 'wp_login', 'loginpetze_generate_email', 10 );
+
+
+
+
+if ( is_admin() ) {
+
+	/**
+	 * register our loginpetze_settings_init to the admin_init action hook
+	 */
+
+	add_action( 'admin_init', 'loginpetze_settings_init' );
+
+
+	/**
+	 * register our loginpetze_options_page to the admin_menu action hook
+	 */
+
+	add_action( 'admin_menu', 'loginpetze_options_page' );
 
 
 	/*
-	 * If this file is called directly, abort.
+	 * When deleting a user, it might be necessary to display a warning
 	 */
-	if ( ! defined( 'WPINC' ) ) {
-		die( 'Direct access is not allowed.' );
-	}
 
-
-
-	/*
-	 * For future reference, we define a version number for the options
-	 */
-	define( 'LOGINPETZE_DB_VERSION', '1.0');
-
-	define('LOGINPETZE_PLUGIN_URL',         plugin_dir_url(__FILE__));
-	define('LOGINPETZE_PLUGIN_DIR',         plugin_dir_path(__FILE__));
-	define('LOGINPETZE_PLUGIN_BASE_NAME',   plugin_basename(__FILE__));
-	define('LOGINPETZE_PLUGIN_FILE',        basename(__FILE__));
-	define('LOGINPETZE_PLUGIN_FULL_PATH',   __FILE__);
-
-
-
-
-	/*
-	 * Before we begin, let's load some functions.
-	 */
-	require_once( 'includes/_loader.php' );
-
-
-
-
-	/* on activation of the plugin, do things */
-	register_activation_hook( __FILE__, 'set_default_values' );
-
-
-
-
-	// Main purpose: on successful login (hook), send an email (action)
-	add_action( 'wp_login', 'loginpetze_generate_email', 10 );
-
-
-
-
-
-	/* thanks to tfrommen */
 	add_action( 'delete_user_form', function ( $whatever, array $userids ) {
 
 		loginpetze_warning_before_deleting_user( $userids );
@@ -103,36 +123,42 @@
 	}, 10, 2 );
 
 
-
-
-
-
-	add_filter( 'plugin_action_links_' . LOGINPETZE_PLUGIN_BASE_NAME , 'loginpetze_plugin_action_links' );
-	function loginpetze_plugin_action_links( $links ) {
-		$loginpetze_links = array(
-			/* translators: action link (displayed in the Plugins list table) */
-			'<a href="options-general.php?page=loginpetze-options">'. __( 'Settings', 'loginpetze' ) . '</a>'
-		);
-
-		return array_merge( $links, $loginpetze_links );
-	}
-
-
-
-
-
-
-
-
-
-	/**
-	 * register our loginpetze_register_options_page to the admin_menu action hook
+	/*
+	 * When displaying the plugin list, add an action link to Loginpetze -> Setting
 	 */
 
-	// add_action( 'admin_menu', 'loginpetze_register_settings_page');
+	add_filter( 'plugin_action_links_' . LOGINPETZE_PLUGIN_BASE_NAME, 'loginpetze_plugin_action_links' );
+
+}
 
 
-	//add_action( 'admin_head-users.php', 'mark_candidate', 1, 2 );
-	// add_action( 'delete_user_form', 'loginpetze_warning_before_deleting_user', 10, 2 );
 
-	// add_action('admin_init', 'loginpetze_generate_email', 1000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * register our loginpetze_register_options_page to the admin_menu action hook
+ */
+
+// add_action( 'admin_menu', 'loginpetze_register_settings_page');
+
+
+// add_action('admin_init', 'loginpetze_generate_email', 1000);

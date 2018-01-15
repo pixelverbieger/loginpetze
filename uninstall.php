@@ -24,32 +24,6 @@ if ( ! defined( 'ABSPATH' ) || ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 require_once ('includes/function-delete-options.php');
 
-if ( ! is_multisite() ) {
+loginpetze_delete_options();
 
-	loginpetze_delete_options();
-
-} else {
-
-	global $wpdb;
-
-	$old_blog = $wpdb->blogid;
-
-	// Get all blog ids
-	$all_blog_ids = $wpdb->get_col( 'SELECT blog_id FROM $wpdb->blogs' );
-
-	/*
-	 * Loop through all blogs and delete the Loginpetze options
-	 */
-
-	foreach ( $all_blog_ids as $blog_id ) {
-		switch_to_blog( $blog_id );
-		loginpetze_delete_options();
-	}
-
-	/*
-	 * Switch back to the main blog
-	 */
-
-	switch_to_blog( $old_blog );
-
-}
+// I hope you enjoyed my plugin.

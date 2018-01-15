@@ -81,11 +81,15 @@ if ( ! function_exists( 'loginpetze_warning_before_deleting_user' ) ) {
 
                         echo ' ';
 
-                        printf(
-                                /* translators: 1: link to the Loginpetze settings page */
+                        if ( current_user_can( 'manage_options')) {
+
+                            printf(
+                            /* translators: 1: link to the Loginpetze settings page */
                                 __( 'You might want to check the <a href="%s">settings</a> before you proceed.', 'loginpetze' ),
                                 'options-general.php?page=loginpetze-options'
-                        );
+                            );
+
+                        }
 
                         ?>
 

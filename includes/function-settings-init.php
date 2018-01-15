@@ -85,21 +85,3 @@ if ( ! function_exists('loginpetze_settings_init' ) ) {
 	}
 
 }
-
-
-/**
- * register our loginpetze_settings_init to the admin_init action hook
- */
-
-add_action( 'admin_init', 'loginpetze_settings_init' );
-
-
-
-
-/**
- * register our loginpetze_options_page to the admin_menu action hook
- */
-
-add_action( 'admin_menu', 'loginpetze_options_page' );
-
-

@@ -192,8 +192,8 @@ if ( ! function_exists('loginpetze_formfields_recipient_callback' ) ) {
 
                 printf(
                 /* translators: help text below the select box; %s stands for Settings &rarr; General &rarr; Email Address */
-	                __( 'The default email address is taken from <b>%s</b>', 'loginpetze' ),
-	                'Settings &rarr; General &rarr; Email Address'
+	                __( 'The default email address is taken from <b>%s</b>.', 'loginpetze' ),
+	                __( 'Settings &rarr; General &rarr; Email Address', 'loginpetze' )
                 );
                 echo '<br />';
 
