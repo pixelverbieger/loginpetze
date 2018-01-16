@@ -16,7 +16,7 @@
  * Plugin Name:       Loginpetze
  * Plugin URI:        https://wordpress.org/plugins/loginpetze/
  * Description:       Notifies the admin by email as soon as a user has successfully logged in.
- * Version:           1.0
+ * Version:           1.1
  * Author:            Christian Sabo
  * Author URI:        https://profiles.wordpress.org/pixelverbieger
  * License:           GPL-2.0+
@@ -51,6 +51,8 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'LOGINPETZE_DB_VERSION', '1.0' );
 
+define( 'LOGINPETZE_REQUIRED_PHP_VERSION', '5.5' );
+
 define( 'LOGINPETZE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'LOGINPETZE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LOGINPETZE_PLUGIN_BASE_NAME', plugin_basename( __FILE__ ) );
@@ -61,7 +63,27 @@ define( 'LOGINPETZE_PLUGIN_FULL_PATH', __FILE__ );
 /*
  * Before we begin, let's load some functions.
  */
+require_once ('includes/function-check-php.php');
+
+loginpetze_check_php();
+
 require_once( 'includes/_loader.php' );
+
+/*
+ * Check if the available PHP meets the plugin's requirements
+ */
+
+
+/*
+ *
+ *
+ * echo $phpversion;
+echo "<br />";
+echo REQUIRED_PHP_VERSION;
+echo "<br />";
+echo version_compare( REQUIRED_PHP_VERSION, PHP_VERSION, '>='  );
+echo "<br />";
+*/
 
 
 /*
@@ -130,35 +152,3 @@ if ( is_admin() ) {
 	add_filter( 'plugin_action_links_' . LOGINPETZE_PLUGIN_BASE_NAME, 'loginpetze_plugin_action_links' );
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * register our loginpetze_register_options_page to the admin_menu action hook
- */
-
-// add_action( 'admin_menu', 'loginpetze_register_settings_page');
-
-
-// add_action('admin_init', 'loginpetze_generate_email', 1000);

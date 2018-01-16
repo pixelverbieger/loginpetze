@@ -1,10 +1,10 @@
 === Loginpetze ===
 Contributors: pixelverbieger, khehl
-Tags: login snitch, staging, login, push, mail, notification, message, alert, monitor, monitoring
+Tags: login snitch, notification, login, alert, monitor, mail, staging, push
 Requires at least: 4.7
 Tested up to: 4.9.1
 Requires PHP: 5.5
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 
 Notifies the admin by email as soon as a user has successfully logged in. The mails are customizable, the plugin is completely translatable.
@@ -42,6 +42,7 @@ It hasn't, but there is no way to rename this section to *Probably Upcoming Ques
 It's the german word for «login snitch».
 
 = How does it work? =
+
 In short: you install it, you select a user to receive the notification mails and you're done.
 
 If you like to, you can customize the subject and body of the mails. There are placeholders available that you can insert into your template: *username*, *blogname*, *date* and *time*.
@@ -52,7 +53,7 @@ If you like to, you can customize the subject and body of the mails. There are p
 
 = Why did you develop this plugin? =
 
-Occasionally (especially when setting up websites for clients) we wanted to be notified if – or when – anybody logged in to the staging websites. For this purpose we used to add some lines to our `function.php` files, which was not very comfortable. For conveniance, we turned our code into this plugin.
+Occasionally (especially when setting up websites for clients) we wanted to be notified if – or when – anybody logged in to the staging websites. For this purpose we used to add some lines to our `functions.php` files, which was not very comfortable. For conveniance, we turned our code into this plugin.
 
 It was also a good opportunity to learn and to completely play through the process of plugin creation.
 
@@ -93,6 +94,12 @@ To find the translation team for your locale, please visit [https://make.wordpre
 Special Thanks go to [Bernhard Kau](https://profiles.wordpress.org/kau-boy/), [Torsten Landsiedel](https://profiles.wordpress.org/zodiac1978), [Bego Mario Garde](https://profiles.wordpress.org/pixolin/) and [Thorsten Frommen](https://profiles.wordpress.org/tfrommen/).
 
 == Changelog ==
+
+= 1.1 =
+* 2018-01-16
+* added: support for Simple History
+* added: check for the required PHP version (5.5)
+* improved: tags for the WordPress Plugin Directory
 
 = 1.0 =
 * 2018-01-15

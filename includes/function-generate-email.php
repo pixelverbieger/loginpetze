@@ -106,10 +106,13 @@ if ( ! function_exists('loginpetze_generate_email') ) {
 
         /**
          * finally, do what Loginpetze is made for:
-         * send the notification email
+         * send the notification email.
+         * If successful, add a log entry to Simple History.
          */
 
-        wp_mail( $recipient_email, $subjectline, $messagebody );
+        if ( wp_mail( $recipient_email, $subjectline, $messagebody ) ) {
+		    require_once ( 'function-simple-history-logger.php' );
+	    }
 
     }
 

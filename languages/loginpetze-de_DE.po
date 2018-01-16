@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Loginpetze\n"
-"POT-Creation-Date: 2018-01-14 21:39+0100\n"
-"PO-Revision-Date: 2018-01-14 21:41+0100\n"
+"POT-Creation-Date: 2018-01-16 16:21+0100\n"
+"PO-Revision-Date: 2018-01-16 16:39+0100\n"
 "Last-Translator: Christian Sabo <christian@pixelverbieger.de>\n"
 "Language-Team: pixelverbieger\n"
 "Language: de\n"
@@ -117,8 +117,8 @@ msgstr "Einstellungen &rarr; Allgemein &rarr; E-Mail-Adresse"
 msgid ""
 "All other entries are <a href=\"%s\">accounts with Administrator role</a>."
 msgstr ""
-"Alle anderen Einträge sind <a href=„%s“>Benutzer mit Administrator-Rechten</"
-"a>."
+"Alle anderen Einträge sind <a href=\"%s\">Benutzer mit Administrator-"
+"Rechten</a>."
 
 #: includes/callback-formfields-subject.php:34
 msgid "Enter the desired subject line for the notification email."
@@ -146,12 +146,22 @@ msgstr "Viele Grüße"
 
 #: includes/function-build-default-mailbody.php:46
 #: includes/function-options-page.php:29
+#: includes/function-simple-history-logger.php:26
 msgid "Loginpetze"
 msgstr "Loginpetze"
 
 #: includes/function-build-default-subject.php:25
 msgid "User [username] logged in to [blogname]"
 msgstr "Benutzer [username] hat sich bei [blogname] eingeloggt"
+
+#: includes/function-check-php.php:26
+#, php-format
+msgid ""
+"Loginpetze can not be activated. It requires PHP %1$s or higher. Your PHP "
+"Version is %2$s."
+msgstr ""
+"Loginpetze kann nicht aktiviert werden. Das Plugin benötigt PHP %1$s oder "
+"höher. Deine PHP-Version ist %2$s."
 
 #: includes/function-options-page.php:27
 msgid "Loginpetze Settings"
@@ -177,6 +187,11 @@ msgstr "Betreff"
 msgid "Mail body"
 msgstr "Mailtext"
 
+#: includes/function-simple-history-logger.php:21
+#, php-format
+msgid "Login notification sent to \"%s\"."
+msgstr "Login-Benachrichtigung verschickt an „%s“."
+
 #: includes/function-warning-before-deleting-user.php:78
 #, php-format
 msgid ""
@@ -191,7 +206,7 @@ msgstr ""
 "Möchtest du die <a href=\"%s\">Einstellungen</a> prüfen, bevor du "
 "weitermachst?"
 
-#: loginpetze.php:79
+#: loginpetze.php:99
 msgid "Loginpetze 1.x does not work on Multisite, I regret."
 msgstr "Loginpetze 1.x funktioniert leider nicht in Multisite-Installationen."
 
