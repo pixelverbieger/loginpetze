@@ -4,7 +4,7 @@ Tags: notification, login, alert, monitor, staging, push
 Requires at least: 4.7
 Tested up to: 5.3
 Requires PHP: 5.5
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 
 Notifies the admin by email as soon as a user has successfully logged in. The mails are customizable, the plugin is completely translatable.
@@ -32,10 +32,6 @@ Loginpetze 1.x is **not compatible** with WordPress Multisite.
 
 
 == Frequently Asked Questions ==
-
-= How can a brand new plugin have frequently asked questions? =
-
-It hasn't, but there is no way to rename this section to *Probably Upcoming Questions* ;)
 
 = «Loginpetze» – what kind of name is that? =
 
@@ -94,6 +90,14 @@ To find the translation team for your locale, please visit [https://make.wordpre
 Special Thanks go to [Bernhard Kau](https://profiles.wordpress.org/kau-boy/), [Torsten Landsiedel](https://profiles.wordpress.org/zodiac1978), [Bego Mario Garde](https://profiles.wordpress.org/pixolin/) and [Thorsten Frommen](https://profiles.wordpress.org/tfrommen/).
 
 == Changelog ==
+
+= 1.3 =
+* 2020-01-14
+* added: some more placeholders
+
+= 1.2 =
+* 2018-10-08
+* Tested up to WordPress 5.3
 
 = 1.1 =
 * 2018-01-16

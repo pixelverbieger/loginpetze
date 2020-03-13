@@ -30,6 +30,7 @@ require_once ( 'function-generate-email.php' );
 require_once ( 'function-options-page.php' );
 require_once ( 'function-options-page-html.php' );
 require_once ( 'function-plugin-action-links.php' );
+require_once ( 'function-register-stylesheet.php' );
 require_once ( 'function-retrieve-email-address.php' );
 require_once ( 'function-set-default-values.php' );
 require_once ( 'function-warning-before-deleting-user.php' );

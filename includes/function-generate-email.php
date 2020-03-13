@@ -6,7 +6,7 @@
  * @author          Christian Sabo
  * @link            https://profiles.wordpress.org/pixelverbieger
  *
- * @version         1.0
+ * @version         1.1
  * @since           1.0
  * @package         Loginpetze
  * @link            https://wordpress.org/plugins/loginpetze/
@@ -22,12 +22,13 @@ if ( ! function_exists('loginpetze_generate_email') ) {
      * - replace all placeholders with the correct values
      * - send the mail
      *
-     * @param string $user_login contains the username of the user who successfully logged-in, inserted by hook wp_login
+     * @param string $user_login contains the username of the user who successfully logged in, inserted by hook wp_login
+     * @param object $userobject contains the WP user data of the user who successfully logged in, inserted by hook wp_login
      * @link https://developer.wordpress.org/reference/hooks/wp_login/
      */
 
-    function loginpetze_generate_email( $user_login ) {
-
+    function loginpetze_generate_email( $user_login, $userobject ) {
+		
         /*
          * retrieve all settings for Loginpetze from database
          * @var object contains all plugin settings
@@ -84,7 +85,7 @@ if ( ! function_exists('loginpetze_generate_email') ) {
          * passing the user_login value to the replace function
          */
 
-        $subjectline = loginpetze_fill_placeholders( $user_login, $subjectline );
+        $subjectline = loginpetze_fill_placeholders( $userobject, $subjectline );
 
         /**
          * prepare the mail body …
@@ -102,7 +103,7 @@ if ( ! function_exists('loginpetze_generate_email') ) {
          * passing the user_login value to the replace function
          */
 
-        $messagebody = loginpetze_fill_placeholders( $user_login, $messagebody );
+        $messagebody = loginpetze_fill_placeholders( $userobject, $messagebody );
 
         /**
          * finally, do what Loginpetze is made for:

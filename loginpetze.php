@@ -16,7 +16,7 @@
  * Plugin Name:       Loginpetze
  * Plugin URI:        https://wordpress.org/plugins/loginpetze/
  * Description:       Notifies the admin by email as soon as a user has successfully logged in.
- * Version:           1.2
+ * Version:           1.3
  * Author:            Christian Sabo
  * Author URI:        https://profiles.wordpress.org/pixelverbieger
  * License:           GPL-2.0+
@@ -70,23 +70,6 @@ loginpetze_check_php();
 require_once( 'includes/_loader.php' );
 
 /*
- * Check if the available PHP meets the plugin's requirements
- */
-
-
-/*
- *
- *
- * echo $phpversion;
-echo "<br />";
-echo REQUIRED_PHP_VERSION;
-echo "<br />";
-echo version_compare( REQUIRED_PHP_VERSION, PHP_VERSION, '>='  );
-echo "<br />";
-*/
-
-
-/*
  * When activating the plugin, we need to set some default values
  */
 
@@ -113,12 +96,20 @@ if ( is_multisite() ) {
  * Main purpose:
  * If a user successfully logged in, send a notification email
  */
-add_action( 'wp_login', 'loginpetze_generate_email', 10 );
+add_action( 'wp_login', 'loginpetze_generate_email', 10, 2 );
 
 
 
 
 if ( is_admin() ) {
+
+
+	/**
+	 * register a stylesheet
+	 */
+
+	add_action( 'admin_enqueue_scripts', 'loginpetze_register_stylesheet' );
+
 
 	/**
 	 * register our loginpetze_settings_init to the admin_init action hook
@@ -146,7 +137,7 @@ if ( is_admin() ) {
 
 
 	/*
-	 * When displaying the plugin list, add an action link to Loginpetze -> Setting
+	 * When displaying the plugin list, add an action link to Loginpetze -> Settings
 	 */
 
 	add_filter( 'plugin_action_links_' . LOGINPETZE_PLUGIN_BASE_NAME, 'loginpetze_plugin_action_links' );
