@@ -1,10 +1,10 @@
 === Loginpetze ===
 Contributors: pixelverbieger, khehl
-Tags: login snitch, notification, login, alert, monitor, mail, staging, push
+Tags: notification, login, alert, monitor, staging, push
 Requires at least: 4.7
-Tested up to: 4.9.1
+Tested up to: 5.3
 Requires PHP: 5.5
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 
 Notifies the admin by email as soon as a user has successfully logged in. The mails are customizable, the plugin is completely translatable.

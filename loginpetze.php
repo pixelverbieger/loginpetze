@@ -16,7 +16,7 @@
  * Plugin Name:       Loginpetze
  * Plugin URI:        https://wordpress.org/plugins/loginpetze/
  * Description:       Notifies the admin by email as soon as a user has successfully logged in.
- * Version:           1.1
+ * Version:           1.2
  * Author:            Christian Sabo
  * Author URI:        https://profiles.wordpress.org/pixelverbieger
  * License:           GPL-2.0+
